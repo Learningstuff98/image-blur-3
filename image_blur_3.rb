@@ -23,14 +23,12 @@ class Image
     (origin_row - zero_row).abs + (origin_col - zero_col).abs
   end
 
-  def blur(blur_distance)
+  def blur(dist)
     origional_coordinates = find_coordinates
     @array.each_with_index do |array, row|
       array.each_with_index do |_or_array_element, col|
         origional_coordinates.each do |origin_col, origin_row|
-          if distance(col, row, origin_col, origin_row) <= blur_distance
-            array[col] = 1
-          end
+          array[col] = 1 if distance(col, row, origin_col, origin_row) <= dist
         end
       end
     end
